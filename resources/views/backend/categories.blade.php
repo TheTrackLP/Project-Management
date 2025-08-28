@@ -1,10 +1,13 @@
 @extends('admin.body.header')
 @section('admin')
-
+@php
+$i = 1;
+@endphp
 <div class="container-fluid">
     <div class="row mt-4">
         <div class="col-4">
-            <form action="">
+            <form action="{{ route('cat.store') }}" method="post">
+                @csrf
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">
@@ -22,7 +25,7 @@
                         </div>
                     </div>
                     <div class="card-footer text-center">
-                        <button type="button" class="btn btn-success px-5">Save Changes</button>
+                        <button type="submit" class="btn btn-success px-5">Save Changes</button>
                     </div>
                 </div>
             </form>
@@ -51,10 +54,15 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($category as $data)
                             <tr>
-                                <td class="text-center">#</td>
-                                <td>Name</td>
-                                <td>Notes</td>
+                                <td class="text-center">{{ $i++ }}</td>
+                                <td class="text-center">
+                                    <p>{{ $data->cat_name }}</p>
+                                </td>
+                                <td>
+                                    <p>{{ $data->cat_notes }}</p>
+                                </td>
                                 <td class="text-center">
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-primary dropdown-toggle"
@@ -62,12 +70,13 @@
                                             <i class="fa-solid fa-gear"></i>
                                         </button>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#">Edit</a></li>
+                                            <li><button class="dropdown-item" value="{{  }}">Edit</button></li>
                                             <li><a class="dropdown-item" href="#">Delete</a></li>
                                         </ul>
                                     </div>
                                 </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

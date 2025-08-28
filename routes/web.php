@@ -16,6 +16,7 @@ Route::controller(AdminController::class)->group(function(){
 
 Route::controller(CategoryController::class)->group(function(){
     Route::get('/admin/categories', 'CategoryIndex')->name('cat.index');
+    Route::post('/admin/categories/store', 'CategoryStore')->name('cat.store');
 });
 Route::controller(DesignationController::class)->group(function(){
     Route::get('/admin/designations', 'DesignationIndex')->name('desig.index');
