@@ -23,7 +23,7 @@ class AdminSeeder extends Seeder
                 'phone_number' => '123',
                 'address' => 'Address',
                 'roles' => 'project_manager',
-                'position' => 'Administrator',
+                'designation_id' => '1',
                 'status' => 'active',
             ],
             //Employee
@@ -34,7 +34,7 @@ class AdminSeeder extends Seeder
                 'phone_number' => '432',
                 'address' => 'Address',
                 'roles' => 'employee',
-                'position' => 'Developer',
+                'designation_id' => '2',
                 'status' => 'active',
             ],
         ]);

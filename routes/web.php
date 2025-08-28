@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DesignationController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -10,6 +12,13 @@ Route::get('/', function () {
 
 Route::controller(AdminController::class)->group(function(){
     Route::get('admin/dashboard', 'AdminDashboard')->name('admin.dash');
+});
+
+Route::controller(CategoryController::class)->group(function(){
+    Route::get('/admin/categories', 'CategoryIndex')->name('cat.index');
+});
+Route::controller(DesignationController::class)->group(function(){
+    Route::get('/admin/designations', 'DesignationIndex')->name('desig.index');
 });
 
 // Route::get('/dashboard', function () {

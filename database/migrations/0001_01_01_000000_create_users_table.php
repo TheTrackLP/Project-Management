@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('phone_number')->nullable();
             $table->longText('address')->nullable();
             $table->enum('roles', ['admin', 'project_manager', 'team_leader', 'employee']);
-            $table->string('position')->nullable();
+            $table->integer('designation_id')->nullable();
             $table->enum('status', ['active', 'inactive']);
             $table->rememberToken();
             $table->timestamps();

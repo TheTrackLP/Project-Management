@@ -32,6 +32,16 @@
                 Reports
             </a>
             <hr>
+            <a class="nav-link" href="{{route('cat.index')}}">
+                <div class="sb-nav-link-icon"><i class="fa-solid fa-list"></i></div>
+                Category
+            </a>
+            <hr>
+            <a class="nav-link" href="{{ route('desig.index') }}">
+                <div class="sb-nav-link-icon"><i class="fa-solid fa-list"></i></div>
+                Designation
+            </a>
+            <hr>
             <a class="nav-link" href="index.html">
                 <div class="sb-nav-link-icon"><i class="fa-solid fa-gear"></i></div>
                 Settings
