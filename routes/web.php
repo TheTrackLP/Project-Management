@@ -1,10 +1,15 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('admin.body.header');
+    return view('auth.login');
+});
+
+Route::controller(AdminController::class)->group(function(){
+    Route::get('admin/dashboard', 'AdminDashboard')->name('admin.dash');
 });
 
 // Route::get('/dashboard', function () {
