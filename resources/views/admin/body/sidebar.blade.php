@@ -17,7 +17,7 @@
                 Tasks
             </a>
             <hr>
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="{{ route('users.index') }}">
                 <div class="sb-nav-link-icon"><i class="fa-solid fa-users"></i></div>
                 Teams/Users
             </a>

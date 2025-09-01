@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DesignationController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -27,6 +28,10 @@ Route::controller(DesignationController::class)->group(function(){
     Route::post('/admin/designations/store', 'DesignationStore')->name('desig.store');
     Route::post('/admin/designations/update', 'DesignationUpdate')->name('desig.update');
     Route::get('/admin/designations/delete/{id}', 'DesignationDelete')->name('desig.delete');
+});
+
+Route::controller(UsersController::class)->group(function(){
+    Route::get('/admin/users-members/', 'UsersIndex')->name('users.index');
 });
 
 // Route::get('/dashboard', function () {
