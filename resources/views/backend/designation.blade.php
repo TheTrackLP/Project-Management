@@ -15,21 +15,21 @@ $d = 1;
                         </h3>
                     </div>
                     <div class="card-body">
-                        <div class="form-group">
+                        <div class="form-group mb-4">
                             <input type="hidden" name="id" id="id">
                             <label for="desg_name">Name:</label>
                             <input type="text" name="desg_name" id="desg_name" class="form-control">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group mb-4">
                             <label for="category_id">Category:</label>
-                            <select name="category_id" id="category_id" class="form-control">
-                                <option value="" selected disable></option>
+                            <select name="category_id" id="category_id" class="select2">
+                                <option value=""></option>
                                 @foreach ($cate as $data)
                                 <option value="{{ $data->id }}">{{ $data->cat_name }}</option>
                                 @endforeach
                             </select>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group mb-4">
                             <label for="desg_notes">Notes:</label>
                             <textarea name="desg_notes" id="desg_notes" class="form-control" rows="9"></textarea>
                         </div>
@@ -48,14 +48,7 @@ $d = 1;
                     </h3>
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered table-hovered" style="border-collapse: collapse;">
-                        <colgroup>
-                            <col width="3%">
-                            <col width="10%">
-                            <col width="10%">
-                            <col width="20%">
-                            <col width="5%">
-                        </colgroup>
+                    <table class="table table-bordered table-hovered dataTables" style="border-collapse: collapse;">
                         <thead class="table-dark">
                             <tr>
                                 <th class="text-center">#</th>
@@ -87,7 +80,7 @@ $d = 1;
                                         <ul class="dropdown-menu">
                                             <li><button class="dropdown-item" id="desgEdit"
                                                     value="{{ $data->id }}">Edit</button></li>
-                                            <li><a class="dropdown-item"
+                                            <li><a class="dropdown-item" id="delete"
                                                     href="{{ route('desig.delete', $data->id) }}">Delete</a></li>
                                         </ul>
                                     </div>

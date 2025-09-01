@@ -30,7 +30,7 @@ class DesignationController extends Controller
         if ($valid->fails()) {
             return redirect()->route('desig.index')
                  ->with([
-                    'meesage' => 'Error, Try Again!',
+                    'message' => 'Error, Try Again!',
                     'alert-type' => 'error',
                  ]);
         }
@@ -43,7 +43,7 @@ class DesignationController extends Controller
     
         return redirect()->route('desig.index')
              ->with([
-                'meesage' => 'Success, Data Stored!',
+                'message' => 'Success, Data Stored!',
                 'alert-type' => 'success',
              ]);
     }
@@ -65,7 +65,7 @@ class DesignationController extends Controller
         if ($valid->fails()) {
             return redirect()->route('desig.index')
                  ->with([
-                    'meesage' => 'Error, Try Again!',
+                    'message' => 'Error, Try Again!',
                     'alert-type' => 'error',
                  ]);
         }
@@ -78,7 +78,7 @@ class DesignationController extends Controller
     
         return redirect()->route('desig.index')
              ->with([
-                'meesage' => 'Success, Data Updated!',
+                'message' => 'Success, Data Updated!',
                 'alert-type' => 'success',
              ]);
     }
@@ -87,7 +87,7 @@ class DesignationController extends Controller
         Designation::findOrFail($id)->delete();
         return redirect()->route('desig.index')
          ->with([
-            'meesage' => 'Success, Data Deleted!',
+            'message' => 'Success, Data Deleted!',
             'alert-type' => 'warning',
          ]); 
     }

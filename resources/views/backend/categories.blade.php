@@ -15,12 +15,12 @@ $i = 1;
                         </h3>
                     </div>
                     <div class="card-body">
-                        <div class="form-group">
+                        <div class="form-group mb-4">
                             <input type="hidden" name="id" id="id">
                             <label for="cat_name">Name:</label>
                             <input type="text" name="cat_name" id="cat_name" class="form-control">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group mb-4">
                             <label for="cat_name">Notes:</label>
                             <textarea name="cat_notes" id="cat_notes" class="form-control" rows="9"></textarea>
                         </div>
@@ -39,13 +39,7 @@ $i = 1;
                     </h3>
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered table-hovered" style="border-collapse: collapse;">
-                        <colgroup>
-                            <col width="3%">
-                            <col width="10%">
-                            <col width="20%">
-                            <col width="5%">
-                        </colgroup>
+                    <table class="table table-bordered table-hovered dataTables" style="border-collapse: collapse;">
                         <thead class="table-dark">
                             <tr>
                                 <th class="text-center">#</th>
@@ -73,7 +67,7 @@ $i = 1;
                                         <ul class="dropdown-menu">
                                             <li><button class="dropdown-item" id="catEdit"
                                                     value="{{ $data->id }}">Edit</button></li>
-                                            <li><a class="dropdown-item"
+                                            <li><a class="dropdown-item" id="delete"
                                                     href="{{ route('cat.delete', $data->id) }}">Delete</a>
                                             </li>
                                         </ul>
