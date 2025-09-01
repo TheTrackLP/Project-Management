@@ -17,9 +17,16 @@ Route::controller(AdminController::class)->group(function(){
 Route::controller(CategoryController::class)->group(function(){
     Route::get('/admin/categories', 'CategoryIndex')->name('cat.index');
     Route::post('/admin/categories/store', 'CategoryStore')->name('cat.store');
+    Route::get('/admin/categories/edit/{id}', 'CategoryEdit')->name('cat.edit');
+    Route::post('/admin/categories/update', 'CategoryUpdate')->name('cat.update');
+    Route::get('/admin/categories/delete/{id}', 'CategoryDelete')->name('cat.delete');
 });
 Route::controller(DesignationController::class)->group(function(){
     Route::get('/admin/designations', 'DesignationIndex')->name('desig.index');
+    Route::get('/admin/designations/edit/{id}', 'DesignationEdit')->name('desig.edit');
+    Route::post('/admin/designations/store', 'DesignationStore')->name('desig.store');
+    Route::post('/admin/designations/update', 'DesignationUpdate')->name('desig.update');
+    Route::get('/admin/designations/delete/{id}', 'DesignationDelete')->name('desig.delete');
 });
 
 // Route::get('/dashboard', function () {

@@ -11,7 +11,16 @@
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
     <link href="{{ asset('assets/css/styles.css')}}" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
+
+<style>
+td,
+p {
+    margin: 0;
+}
+</style>
 
 <body class="sb-nav-fixed">
     @include('admin.body.navbar')

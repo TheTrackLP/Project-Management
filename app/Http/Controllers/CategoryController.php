@@ -39,4 +39,46 @@ class CategoryController extends Controller
                     'alert-type' => 'success',
                  ]);
     }
+
+    public function CategoryEdit($id){
+        $cate = Categories::findOrFail($id);
+        return response()->json([
+            'cate'=>$cate,
+        ]);
+    }
+
+      public function CategoryUpdate(Request $request){
+        $valid = Validator::make($request->all(), [
+            'cat_name' => 'required',
+            'cat_notes' => 'required',
+        ]);
+
+        if($valid->fails()){
+            return redirect()->route('cat.index')
+                             ->with([
+                                'meesage' => 'Error, Try Again!',
+                                'alert-type' => 'error',
+                             ]);
+        }
+
+        Categories::findOrFail($request->id)->update([
+            'cat_name' => $request->cat_name,
+            'cat_notes' => $request->cat_notes,
+        ]);
+
+        return redirect()->route('cat.index')
+                 ->with([
+                    'meesage' => 'Success!, Data Updated',
+                    'alert-type' => 'success',
+                 ]);
+    }
+
+    public function CategoryDelete($id){
+        Categories::findOrFail($id)->delete();
+        return redirect()->route("cat.index")
+                         ->with([
+                            'meesage' => 'Success!, Data Deleted',
+                            'alert-type' => 'warning',
+                         ]);
+    }
 }

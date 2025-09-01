@@ -6,7 +6,7 @@ $i = 1;
 <div class="container-fluid">
     <div class="row mt-4">
         <div class="col-4">
-            <form action="{{ route('cat.store') }}" method="post">
+            <form action="{{ route('cat.store') }}" method="post" id="category_form">
                 @csrf
                 <div class="card">
                     <div class="card-header">
@@ -16,6 +16,7 @@ $i = 1;
                     </div>
                     <div class="card-body">
                         <div class="form-group">
+                            <input type="hidden" name="id" id="id">
                             <label for="cat_name">Name:</label>
                             <input type="text" name="cat_name" id="cat_name" class="form-control">
                         </div>
@@ -45,7 +46,7 @@ $i = 1;
                             <col width="20%">
                             <col width="5%">
                         </colgroup>
-                        <thead>
+                        <thead class="table-dark">
                             <tr>
                                 <th class="text-center">#</th>
                                 <th class="text-center">Name</th>
@@ -56,22 +57,25 @@ $i = 1;
                         <tbody>
                             @foreach ($category as $data)
                             <tr>
-                                <td class="text-center">{{ $i++ }}</td>
-                                <td class="text-center">
+                                <td class="text-center align-middle">{{ $i++ }}</td>
+                                <td class="text-center align-middle">
                                     <p>{{ $data->cat_name }}</p>
                                 </td>
-                                <td>
+                                <td class="align-middle">
                                     <p>{{ $data->cat_notes }}</p>
                                 </td>
-                                <td class="text-center">
+                                <td class="text-center align-middle">
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-primary dropdown-toggle"
                                             data-bs-toggle="dropdown" aria-expanded="false">
                                             <i class="fa-solid fa-gear"></i>
                                         </button>
                                         <ul class="dropdown-menu">
-                                            <li><button class="dropdown-item" value="{{  }}">Edit</button></li>
-                                            <li><a class="dropdown-item" href="#">Delete</a></li>
+                                            <li><button class="dropdown-item" id="catEdit"
+                                                    value="{{ $data->id }}">Edit</button></li>
+                                            <li><a class="dropdown-item"
+                                                    href="{{ route('cat.delete', $data->id) }}">Delete</a>
+                                            </li>
                                         </ul>
                                     </div>
                                 </td>
@@ -85,5 +89,23 @@ $i = 1;
     </div>
 </div>
 
+<script>
+$(document).ready(function() {
+    $(document).on('click', '#catEdit', function() {
+        var cat_id = $(this).val();
 
+        $.ajax({
+            type: "GET",
+            url: "/admin/categories/edit/" + cat_id,
+            success: function(res) {
+                $("#cat_name").val(res.cate.cat_name);
+                $("#cat_notes").val(res.cate.cat_notes);
+                $("#id").val(cat_id);
+
+                $("#category_form").attr('action', "{{ route('cat.update') }}")
+            }
+        });
+    });
+});
+</script>
 @endsection
