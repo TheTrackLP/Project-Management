@@ -11,18 +11,18 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::controller(AdminController::class)->group(function(){
+Route::controller(AdminController::class)->group(function () {
     Route::get('admin/dashboard', 'AdminDashboard')->name('admin.dash');
 });
 
-Route::controller(CategoryController::class)->group(function(){
+Route::controller(CategoryController::class)->group(function () {
     Route::get('/admin/categories', 'CategoryIndex')->name('cat.index');
     Route::post('/admin/categories/store', 'CategoryStore')->name('cat.store');
     Route::get('/admin/categories/edit/{id}', 'CategoryEdit')->name('cat.edit');
     Route::post('/admin/categories/update', 'CategoryUpdate')->name('cat.update');
     Route::get('/admin/categories/delete/{id}', 'CategoryDelete')->name('cat.delete');
 });
-Route::controller(DesignationController::class)->group(function(){
+Route::controller(DesignationController::class)->group(function () {
     Route::get('/admin/designations', 'DesignationIndex')->name('desig.index');
     Route::get('/admin/designations/edit/{id}', 'DesignationEdit')->name('desig.edit');
     Route::post('/admin/designations/store', 'DesignationStore')->name('desig.store');
@@ -30,8 +30,9 @@ Route::controller(DesignationController::class)->group(function(){
     Route::get('/admin/designations/delete/{id}', 'DesignationDelete')->name('desig.delete');
 });
 
-Route::controller(UsersController::class)->group(function(){
+Route::controller(UsersController::class)->group(function () {
     Route::get('/admin/users-members/', 'UsersIndex')->name('users.index');
+    Route::post('/admin/users-members/store', 'UsersStore')->name('users.store');
 });
 
 // Route::get('/dashboard', function () {
@@ -44,4 +45,4 @@ Route::controller(UsersController::class)->group(function(){
 //     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 // });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
