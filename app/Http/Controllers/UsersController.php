@@ -15,7 +15,13 @@ class UsersController extends Controller
     {
         $cat = Categories::all();
         $desg = Designation::all();
-        return view('backend.users', compact('cat', 'desg'));
+        $users = User::select(
+                        "users.*",
+                        "designations.desg_name",
+                        )
+                        ->join("designations", "designations.id", "=", 'users.designation_id')
+                        ->get();
+        return view('backend.users', compact('cat', 'desg', 'users'));
     }
 
     public function UsersStore(Request $request)
@@ -38,9 +44,16 @@ class UsersController extends Controller
                     'alert-type' => 'error',
                 ]);
         }
+        
+        $path = '';
 
+        if($request->hasFile('avatar')){
+            $filename = str_replace(' ', '_', $request->name) . '.' . $request->file('avatar')->getClientOriginalExtension();
+            $request->file('avatar')->move(public_path('img'), $filename);
+            $path = 'img/'. $filename;
+        }
         User::create([
-            'avatar' => $request->avatar,
+            'avatar' => $path,
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
@@ -56,4 +69,13 @@ class UsersController extends Controller
                 'alert-type' => 'success',
             ]);
     }
+
+    public function UserInfo($id){
+        $info = User::findOrFail($id);
+        return response()->json([
+            'info'=>$info,
+        ]);
+    }
+
+    
 }

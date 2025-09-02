@@ -100,6 +100,15 @@ $(document).ready(function() {
         width: "100%",
         placeholder: "Select an option",
     });
+
+    $(".modalSelect2").each(function() {
+        var $this = $(this);
+        $this.select2({
+            width: "100%",
+            placeholder: "Select an option",
+            dropdownParent: $this.closest('.modal'),
+        });
+    })
 });
 </script>
 
