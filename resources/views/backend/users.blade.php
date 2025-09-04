@@ -45,9 +45,9 @@ $i = 1;
                         <td class="text-center align-middle">{{ $i++ }}</td>
                         <td class="text-center align-middle">
                             @if($row->avatar)
-                            <p><img src="{{ asset($row->avatar) }}" alt="Employee Picture" width="100"></p>
+                            <p><img src="{{ asset($row->avatar) }}" alt="Employee Picture" width="50"></p>
                             @else
-                            <p><img src="{{ asset('img/profile-blank.png') }}" alt="Employee Picture" width="100"></p>
+                            <p><img src="{{ asset('img/profile-blank.png') }}" alt="Employee Picture" width="50"></p>
                             @endif
                         </td>
                         <td class="text-center align-middle">
@@ -63,9 +63,11 @@ $i = 1;
                             <p>{{ $row->desg_name }}</p>
                         </td>
                         <td class="text-center align-middle">
-                            <p>
-                                <span class="badge rounded-pill text-bg-success">{{ $row->status }}</span>
-                            </p>
+                            @if($row->status == 'active')
+                            <span class="badge rounded-pill text-bg-success">Active</span>
+                            @elseif($row->status == 'inactive')
+                            <span class="badge rounded-pill text-bg-danger">Inactive</span>
+                            @endif
                         </td>
                         <td class="text-center align-middle">
                             <p>{{ date('M d, Y', strtotime($row->created_at)) }}</p>
@@ -77,10 +79,11 @@ $i = 1;
                                     <i class="fa-solid fa-gear"></i>
                                 </button>
                                 <ul class="dropdown-menu">
-                                    <li><button class="dropdown-item manageInfo" value="{{ $row->id }}">VIew</button>
+                                    <li><button class="dropdown-item manageInfo"
+                                            value="{{ $row->id }}">VIew/Edit</button>
                                     </li>
-                                    <li><button class="dropdown-item" id="userEdit" value="">Edit</button></li>
-                                    <li><a class="dropdown-item" id="delete" href="">Delete</a></li>
+                                    <li><a class="dropdown-item" id="delete"
+                                            href="{{ route('users.delete', $row->id) }}">Delete</a></li>
                                 </ul>
                             </div>
                         </td>

@@ -94,16 +94,24 @@ class UsersController extends Controller
                     'alert-type' => 'error',
                 ]);
         }
-        
-        $path = '';
-        if($request->hasFile('avatar')){
-            $filename = str_replace(' ', '_', $request->name) . '.' . $request->file('avatar')->getClientOriginalExtension();
+                
+        $path = $request->curr_avatar ?: 'img/profile-blank.png';
+
+        if ($request->hasFile('avatar')) {
+            if ($request->curr_avatar && $request->curr_avatar !== 'img/profile-blank.png') {
+                $oldPath = public_path($request->curr_avatar);
+                if (file_exists($oldPath)) {
+                    unlink($oldPath);
+                }
+            }
+            $filename = str_replace(' ', '_', $request->name) . '.' .
+                        $request->file('avatar')->getClientOriginalExtension();
+
             $request->file('avatar')->move(public_path('img'), $filename);
             $path = 'img/' . $filename;
-        } else{
-            $path = $request->curr_avatar ?? 'img/profile-blank.png';
         }
-        $try = User::findOrFail($request->id)->update([
+
+        User::findOrFail($request->id)->update([
             'avatar' => $path,
             'name' => $request->name,
             'email' => $request->email,
@@ -120,5 +128,13 @@ class UsersController extends Controller
                 'message' => 'Success, Data Updated!',
                 'alert-type' => 'success',
             ]);
+    }
+
+    public function UserDelete($id){
+        User::findOrFail($id)->delete();
+        return redirect()->route('users.index')->with([
+            'message' => 'Success, Data Deleted!',
+            'alert-type' => 'warning',
+        ]);
     }
 }

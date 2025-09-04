@@ -35,6 +35,7 @@ Route::controller(UsersController::class)->group(function () {
     Route::get('/admin/users-members/{id}', 'UserInfo')->name('users.info');
     Route::post('/admin/users-members/store', 'UsersStore')->name('users.store');
     Route::post('/admin/users-members/update', 'UserInfoUpdate')->name('users.update');
+    Route::get('/admin/users-members/delete/{id}', 'UserDelete')->name('users.delete');
 });
 
 // Route::get('/dashboard', function () {
