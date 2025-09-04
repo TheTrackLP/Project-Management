@@ -7,7 +7,7 @@
                 Dashboard
             </a>
             <hr>
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="{{ route('projects.index') }}">
                 <div class="sb-nav-link-icon"><i class="fa-solid fa-diagram-project"></i></div>
                 Projects
             </a>
