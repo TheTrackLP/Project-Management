@@ -42,6 +42,7 @@ Route::controller(UsersController::class)->group(function () {
 Route::controller(ProjectController::class)->group(function(){
     Route::get('/admin/projects/', 'ProjectsIndex')->name('projects.index');
     Route::get('/admin/projects/create', 'createProjects')->name('projects.create');
+    Route::post('/admin/projects/store', 'ProjectStore')->name('projects.store');
 });
 
 // Route::get('/dashboard', function () {

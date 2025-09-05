@@ -22,9 +22,9 @@ class AdminSeeder extends Seeder
                 'password' => Hash::make(111),
                 'phone_number' => '123',
                 'address' => 'Address',
-                'roles' => 'project_manager',
+                'roles' => '1',
                 'designation_id' => '1',
-                'status' => 'active',
+                'status' => '1',
             ],
             //Employee
             [
@@ -33,9 +33,9 @@ class AdminSeeder extends Seeder
                 'password' => Hash::make(111),
                 'phone_number' => '432',
                 'address' => 'Address',
-                'roles' => 'employee',
+                'roles' => '2',
                 'designation_id' => '2',
-                'status' => 'active',
+                'status' => '1',
             ],
         ]);
     }

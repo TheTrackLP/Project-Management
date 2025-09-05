@@ -19,6 +19,10 @@ class User extends Authenticatable
      */
     protected $guarded = [];
 
+    public function project(){
+        return $this->belongsToMany(Projects::class, 'project_members');
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

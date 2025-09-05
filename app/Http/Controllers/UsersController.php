@@ -27,10 +27,8 @@ class UsersController extends Controller
     public function UsersStore(Request $request)
     {
         $valid = Validator::make($request->all(), [
-            'avatar' => 'required',
             'name' => 'required',
             'email' => 'required',
-            'password' => 'required',
             'phone_number' => 'required',
             'address' => 'required',
             'category_id' => 'required',
@@ -51,6 +49,8 @@ class UsersController extends Controller
             $filename = str_replace(' ', '_', $request->name) . '.' . $request->file('avatar')->getClientOriginalExtension();
             $request->file('avatar')->move(public_path('img'), $filename);
             $path = 'img/'. $filename;
+        } else {
+            $path = 'img/profile-blank.png';
         }
         User::create([
             'avatar' => $path,

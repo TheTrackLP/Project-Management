@@ -102,14 +102,13 @@ switch (type) {
 $(document).ready(function() {
     $(".dataTables").dataTable();
     $('.summernote').summernote({
-        height: 400,
+        height: 300,
     });
     $(".select2").select2({
         width: "100%",
         placeholder: "Select an option",
         theme: 'bootstrap-5'
     });
-
     $(".modalSelect2").each(function() {
         var $this = $(this);
         $this.select2({

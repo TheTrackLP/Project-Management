@@ -20,10 +20,10 @@ return new class extends Migration
             $table->string('password');
             $table->integer('phone_number')->nullable();
             $table->longText('address')->nullable();
-            $table->enum('roles', ['admin', 'project_manager', 'team_leader', 'employee'])->default('employee');
+            $table->tinyInteger('roles')->default(0);
             $table->integer('category_id')->nullable();
             $table->integer('designation_id')->nullable();
-            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->tinyInteger('status')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });
