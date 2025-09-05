@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categories;
+use App\Models\Project_members;
 use App\Models\Project_user;
 use App\Models\Projects;
 use App\Models\User;
@@ -75,5 +76,34 @@ class ProjectController extends Controller
                             'message' => 'Success, Data Stored!',
                             'alert-type' => 'success',
                         ]);
+    }
+
+    public function ProjectsView($id){
+        $prj_info = Projects::select(
+                            "projects.*",
+                            "users.name as manager_name",
+                            "users.email as manager_email",
+                            "users.phone_number as manager_number",
+                            "categories.cat_name",
+                            )
+                            ->join("users", "users.id", "=", "projects.project_manager_id")
+                            ->join("categories", "categories.id", "=", "projects.category_id")
+                            ->where("projects.id", $id)
+                            ->first();
+
+        $members = Project_members::select(
+                            "project_members.*",
+                            "users.name as member_name",
+                            "users.email as member_email",
+                            "users.category_id as member_category",
+                            "users.designation_id as member_desgination",
+                            "categories.cat_name",
+                            "designations.desg_name",
+                        )
+                        ->join("users", "users.id", "=", "project_members.user_id")
+                        ->join("categories", "categories.id", "=", "users.category_id")
+                        ->join("designations", "designations.id", "=", "users.designation_id")
+                        ->get();
+        return view('backend.projects.view_project', compact('prj_info', 'members'));
     }
 }

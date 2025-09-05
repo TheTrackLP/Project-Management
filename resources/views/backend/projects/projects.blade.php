@@ -65,8 +65,9 @@ $i = 1;
                                     <i class="fa-solid fa-gear"></i>
                                 </button>
                                 <ul class="dropdown-menu">
-                                    <li><button class="dropdown-item manageInfo"
-                                            value="{{ $data->id }}">VIew/Edit</button>
+                                    <li><a class="dropdown-item" href="{{ route('projects.view', $data->id) }}">View</a>
+                                    </li>
+                                    <li><a href="#" class="dropdown-item">Edit</a>
                                     </li>
                                     <li><a class="dropdown-item" id="delete" href="#">Delete</a></li>
                                 </ul>
