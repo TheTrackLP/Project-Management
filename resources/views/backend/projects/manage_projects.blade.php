@@ -18,26 +18,26 @@
                     <div class="col-6">
                         <div class="form-group">
                             <label for="">Name</label>
-                            <input type="text" name="name" id="" class="form-control">
+                            <input type="text" name="name" id="name" class="form-control">
                         </div>
                     </div>
                     <div class="col-3">
                         <div class="form-group">
                             <label for="">Start Date</label>
-                            <input type="date" name="start_date" id="" class="form-control">
+                            <input type="date" name="start_date" id="start_date" class="form-control">
                         </div>
                     </div>
                     <div class="col-3">
                         <div class="form-group">
                             <label for="">End Date</label>
-                            <input type="date" name="end_date" id="" class="form-control">
+                            <input type="date" name="end_date" id="end_date" class="form-control">
                         </div>
                     </div>
                 </div>
                 <div class="row mb-4">
                     <div class="col-6">
                         <label for="">Project Manager</label>
-                        <select name="project_manager_id" id="" class="select2">
+                        <select name="project_manager_id" id="project_manager_id" class="select2">
                             <option value=""></option>
                             @foreach ($users as $user)
                             <option value="{{ $user->id }}">{{ $user->cat_name }} | Project Manager {{ $user->name }} |
@@ -47,7 +47,7 @@
                     </div>
                     <div class="col-6">
                         <label for="">Category</label>
-                        <select name="category_id" id="" class="select2">
+                        <select name="category_id" id="category_id" class="select2">
                             <option value=""></option>
                             @foreach ($cate as $row)
                             <option value="{{ $row->id }}">{{ $row->cat_name }}</option>
@@ -68,7 +68,7 @@
                     </div>
                     <div class="col-2">
                         <label for="">Status</label>
-                        <select name="status" id="" class="select2">
+                        <select name="status" id="status" class="select2">
                             <option value="" disabled selected>Select an option</option>
                             <option value="0">Pending</option>
                             <option value="1">Ongoing</option>
@@ -78,7 +78,7 @@
                     </div>
                     <div class="col-2">
                         <label for="">Priority</label>
-                        <select name="priority" id="" class="select2">
+                        <select name="priority" id="priority" class="select2">
                             <option value="" disabled selected>Select an option</option>
                             <option value="1">Low</option>
                             <option value="2">Medium</option>
@@ -89,7 +89,7 @@
                 </div>
                 <div class="row mb-4">
                     <label for="">Description</label>
-                    <textarea name="description" class="summernote"></textarea>
+                    <textarea name="description" class="summernote" id="description"></textarea>
                 </div>
             </div>
             <div class="card-footer">

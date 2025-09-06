@@ -106,4 +106,18 @@ class ProjectController extends Controller
                         ->get();
         return view('backend.projects.view_project', compact('prj_info', 'members'));
     }
+
+    public function ProjectManage($id){
+        $prj_data = Projects::findOrFail($id);
+        $users = User::select(
+            "users.*",
+            "categories.cat_name",
+            "designations.desg_name"
+        )
+        ->join("categories", "categories.id", "users.category_id")
+        ->join("designations", "designations.id", "users.designation_id")
+        ->get();
+        $cate = Categories::all();
+        return view('backend.projects.manage_projects', compact('users', 'cate', 'prj_data'));
+    }
 }

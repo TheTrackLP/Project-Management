@@ -47,6 +47,25 @@ p {
 label {
     font-weight: bold;
 }
+
+.sb-sidenav .nav-link {
+    color: #adb5bd;
+    padding: 12px 18px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.sb-sidenav .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    transform: translateX(5px);
+}
+
+.sb-sidenav .nav-link.active {
+    background-color: #0d6efd;
+    color: #fff !important;
+    font-weight: 500;
+}
 </style>
 
 <body class="sb-nav-fixed">

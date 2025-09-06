@@ -67,7 +67,7 @@ $i = 1;
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="{{ route('projects.view', $data->id) }}">View</a>
                                     </li>
-                                    <li><a href="#" class="dropdown-item">Edit</a>
+                                    <li><a href="{{ route('projects.edit', $data->id) }}" class="dropdown-item">Edit</a>
                                     </li>
                                     <li><a class="dropdown-item" id="delete" href="#">Delete</a></li>
                                 </ul>
