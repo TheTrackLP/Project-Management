@@ -8,7 +8,8 @@ class Projects extends Model
 {
     protected $guarded = [];
 
-    public function members(){
+    public function members()
+    {
         return $this->belongsToMany(User::class, 'project_members');
     }
 }

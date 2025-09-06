@@ -45,6 +45,7 @@ Route::controller(ProjectController::class)->group(function(){
     Route::get('/admin/projects/edit/{id}', 'ProjectManage')->name('projects.edit');
     Route::get('/admin/projects/create', 'createProjects')->name('projects.create');
     Route::post('/admin/projects/store', 'ProjectStore')->name('projects.store');
+    Route::post('/admin/projects/update', 'ProjectUpdate')->name('projects.update');
 });
 
 // Route::get('/dashboard', function () {

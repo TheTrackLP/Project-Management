@@ -80,5 +80,12 @@ $i = 1;
         </div>
     </div>
 </div>
-
+<script>
+// $(document).ready(function() {
+//     $(document).on('click', "#editForm", function() {
+//         var exID = $(this).val();
+//         alert(exID);
+//     });
+// });
+</script>
 @endsection

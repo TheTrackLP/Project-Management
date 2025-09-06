@@ -29,10 +29,11 @@ p {
         <div class="card-header d-flex justify-content-between align-items-center">
             <h1>Informations</h1>
             <div>
-                <button class="btn btn-lg btn-info px-4 text-white rounded-pill"><i class="fa-solid fa-pencil"></i>
-                    Edit</button>
-                <button class="btn btn-lg btn-primary px-4 rounded-pill"><i class="fa-solid fa-circle-left"></i>
-                    Back</button>
+                <a href="{{ route('projects.edit', $prj_info->id) }}"
+                    class="btn btn-lg btn-info px-4 text-white rounded-pill"><i class="fa-solid fa-pencil"></i> Edit</a>
+                <a href="{{ route('projects.index') }}" class="btn btn-lg btn-primary px-4 rounded-pill"><i
+                        class="fa-solid fa-circle-left"></i>
+                    Back</a>
             </div>
         </div>
         <div class="card-body">
