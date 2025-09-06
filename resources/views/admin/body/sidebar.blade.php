@@ -13,7 +13,7 @@
                 Projects
             </a>
             <hr>
-            <a class="nav-link" href="#">
+            <a class="nav-link {{ request()->routeIs('tasks.*') ? 'active' : '' }}" href="{{ route('tasks.index') }}">
                 <div class="sb-nav-link-icon"><i class="fa-solid fa-gauge"></i></div>
                 Tasks
             </a>
