@@ -2,18 +2,16 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use DB;
 use Hash;
-use App\Models\Categories;
-use App\Models\Designation;
+use App\Models\User;
 
-class DatabaseSeeder extends Seeder
+class AdminSeeder extends Seeder
 {
     /**
-     * Seed the application's database.
+     * Run the database seeds.
      */
     public function run(): void
     {
@@ -54,21 +52,5 @@ class DatabaseSeeder extends Seeder
                 'status' => "1",
             ]);
         }
-        Categories::create([
-            'cat_name' => "Web Development",
-            'cat_notes' => 'Web Devs' 
-        ]);
-        Designation::insert([
-            [
-                'desg_name' => "Junior Web Developer",
-                'category_id' => "1",
-                'desg_notes' => 'For Web Development',
-            ],
-            [
-                'desg_name' => "Senior Web Developer",
-                'category_id' => "1",
-                'desg_notes' => 'For Web Development',
-            ],
-        ]);
     }
 }

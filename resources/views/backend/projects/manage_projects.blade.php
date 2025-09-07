@@ -3,10 +3,10 @@
 <div class="container-fluid">
     <h2 class="my-4"><i class="fa-solid fa-diagram-project"></i> Manage Project</h2>
     <hr>
-    @if($prj_data->id)
-    <form action="{{ route('projects.update') }}" method="post">
+    @if(!empty($prj_data->id))
+    <form action="{{ route('projects.store') }}" method="post">
         @else
-        <form action="{{ route('projects.store') }}" method="post">
+        <form action="{{ route('projects.update') }}" method="post">
             @endif
             @csrf
             <div class="card">
@@ -78,7 +78,7 @@
                                 <option value=""></option>
                                 @foreach ($users as $row)
                                 <option value="{{ $row->id }}"
-                                    {{ in_array($row->id, $selectedMembers) ? 'selected' : '' }}>
+                                    {{ in_array($row->id, $selectedMembers ?? []) ? 'selected' : '' }}>
                                     {{ $row->cat_name }} | {{ $row->name }} |
                                     {{ $row->desg_name }}</option>
                                 @endforeach
