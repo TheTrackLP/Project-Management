@@ -52,6 +52,9 @@ Route::controller(ProjectController::class)->group(function(){
 Route::controller(TasksController::class)->group(function(){
     Route::get('/admin/tasks', 'TasksIndex')->name('tasks.index');
     Route::get('/admin/projects/{id}/users', 'getAssignedUsers');
+    Route::post('/admin/tasks/store', 'TaskStore')->name('tasks.store');
+    Route::get('/admin/tasks/edit/{id}', 'TaskInfo');
+    Route::post('/admin/tasks/update', 'taskUpdate')->name('task.update');
 });
 
 // Route::get('/dashboard', function () {

@@ -8,8 +8,8 @@ $i = 1;
     <hr>
     <div class="card">
         <div class="card-header">
-            <a href="#" class="btn btn-primary px-4 float-end" data-bs-toggle="modal" data-bs-target="#manageTask"><i
-                    class="fa-solid fa-circle-plus"></i> Create
+            <a href="#" class="btn btn-primary px-4 float-end" data-bs-toggle="modal" data-bs-target="#manageTask"
+                id="clearForm"><i class="fa-solid fa-circle-plus"></i> Create
                 New</a>
             <h3 class="card-title">
                 Information Tasks
@@ -22,6 +22,7 @@ $i = 1;
                         <th class="text-center">#</th>
                         <th class="text-center">Project</th>
                         <th class="text-center">Task</th>
+                        <th class="text-center">Assigned User</th>
                         <th class="text-center">Duration</th>
                         <th class="text-center">Status</th>
                         <th class="text-center">Date</th>
@@ -29,13 +30,36 @@ $i = 1;
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ($tasks as $task)
                     <tr>
                         <td class="align-middle text-center">{{ $i++ }}</td>
-                        <td class="align-middle"></td>
-                        <td class="align-middle"></td>
-                        <td class="align-middle"></td>
-                        <td class="align-middle"></td>
-                        <td class="align-middle"></td>
+                        <td class="align-middle text-center">
+                            <p>{{ $task->project_name }}</p>
+                        </td>
+                        <td class="align-middle text-center">
+                            <p>{{ $task->task_name }}</p>
+                        </td>
+                        <td class="align-middle text-center">
+                            <p>{{ $task->assigned_name }}</p>
+                        </td>
+                        <td class="align-middle text-center">
+                            <p>Start: <b>{{ date('M d, Y',strtotime($task->start_date)) }}</b></p>
+                            <p>End: <b>{{ date('M d, Y',strtotime($task->end_date)) }}</b></p>
+                        </td>
+                        <td class="align-middle text-center">
+                            @if ($task->status == 0)
+                            <span class="badge text-bg-secondary">Pending</span>
+                            @elseif($task->status == 1)
+                            <span class="badge text-bg-primary">Ongoing</span>
+                            @elseif($task->status == 2)
+                            <span class="badge text-bg-success">Completed</span>
+                            @elseif($task->status == 3)
+                            <span class="badge text-bg-danger">Cancelled</span>
+                            @endif
+                        </td>
+                        <td class="align-middle text-center">
+                            <p>{{ date('M d, Y',strtotime($task->created_at)) }}</p>
+                        </td>
                         <td class="align-middle text-center">
                             <div class="btn-group">
                                 <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
@@ -45,13 +69,15 @@ $i = 1;
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="#">View</a>
                                     </li>
-                                    <li><a href="#" class="dropdown-item">Edit</a>
+                                    <li><button value="{{ $task->id }}" class="dropdown-item"
+                                            id="editTask">Edit</button>
                                     </li>
                                     <li><a class="dropdown-item" id="delete" href="#">Delete</a></li>
                                 </ul>
                             </div>
                         </td>
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
@@ -60,15 +86,19 @@ $i = 1;
 
 <div class="modal fade" id="manageTask" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog modal-xl">
-        <form action="">
+        <form action="{{ route('tasks.store') }}" method="post" id="taskForm">
+            @csrf
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">Task Information</h3>
+                    <button type="button" class="btn btn-danger rounded-pill text-white" data-bs-dismiss="modal"><i
+                            class="fa-solid fa-circle-xmark"></i> Close</button>
                 </div>
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-3 mb-3">
                             <div class="form-group">
+                                <input type="hidden" name="id" id="id">
                                 <label for="">Name</label>
                                 <input type="text" name="task_name" id="task_name" class="form-control">
                             </div>
@@ -76,7 +106,7 @@ $i = 1;
                         <div class="col-3 mb-3">
                             <div class="form-group">
                                 <label for="">Assigned Task</label>
-                                <select name="assigned_users" id="assigned_users" class="modalSelect2">
+                                <select name="assigned_user" id="assigned_user" class="modalSelect2">
                                     <option value=""></option>
                                     <option value=""></option>
                                     <option value=""></option>
@@ -156,13 +186,49 @@ $(document).ready(function() {
             type: "GET",
             url: "/admin/projects/" + prj_id + "/users",
             success: function(res) {
-                $('#assigned_users').empty();
+                $('#assigned_user').empty();
                 $.each(res, function(key, user) {
-                    $("#assigned_users").append(
+                    $("#assigned_user").append(
                         '<option value="' + user.id + '">' + user.name +
                         '</option>'
                     );
                 });
+            }
+        });
+    });
+
+    $(document).on("click", "#clearForm", function() {
+        $("#task_name").val("");
+        $("#project_id").val("").trigger("change");
+        $("#assigned_user").val("").trigger("change");
+        $("#start_date").val("");
+        $("#end_date").val("");
+        $("#priority").val("").trigger("change");
+        $("#status").val("").trigger("change");
+        $("#description").summernote("code", "");
+        $("#id").val("");
+        $("#taskForm").attr('action', "{{ route('tasks.store') }}");
+    });
+
+    $(document).on("click", "#editTask", function() {
+        var task_id = $(this).val();
+
+        $("#manageTask").modal("show");
+
+        $.ajax({
+            type: "GET",
+            url: "/admin/tasks/edit/" + task_id,
+            success: function(res) {
+                $("#task_name").val(res.task.task_name);
+                $("#project_id").val(res.task.project_id).trigger("change");
+                $("#assigned_user").val(res.task.assigned_user).trigger("change");
+                $("#start_date").val(res.task.start_date);
+                $("#end_date").val(res.task.end_date);
+                $("#priority").val(res.task.priority).trigger("change");
+                $("#status").val(res.task.status).trigger("change");
+                $("#description").summernote("code", res.task.description);
+                $("#id").val(task_id);
+                $("#taskForm").attr('action', "{{ route('task.update') }}");
             }
         });
     });

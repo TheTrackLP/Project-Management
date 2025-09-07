@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('task_name');
             $table->integer('project_id');
             $table->longText('description');
-            $table->integer('user_id');
+            $table->integer('assigned_user');
             $table->date('start_date');
             $table->date('end_date');
             $table->integer('priority');
