@@ -9,15 +9,12 @@
 </style>
 <div class="container-fluid px-4">
     <h1 class="mt-4">Dashboard</h1>
-    <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item active">Overview</li>
-    </ol>
 
     <!-- Top Stats Cards -->
     <div class="row g-4">
         <!-- Admins -->
         <div class="col-xl-3 col-md-6">
-            <div class="card border-dark hover shadow h-100">
+            <div class="card hover shadow-sm h-100">
                 <div class="card-body d-flex justify-content-between align-items-center">
                     <div>
                         <h5 class="card-title">Users</h5>
@@ -26,29 +23,31 @@
                     <i class="fas fa-user-shield fa-3x"></i>
                 </div>
                 <div class="card-footer text-center">
-                    <a class="text-dark" href="#">VIEW DETAILS <i class="fa-regular fa-circle-right"></i></a>
+                    <a class="text-dark" href="{{ route('users.index') }}">View Details <i
+                            class="fa-regular fa-circle-right"></i></a>
                 </div>
             </div>
         </div>
 
         <!-- Users -->
         <div class="col-xl-3 col-md-6">
-            <div class="card border-dark hover shadow h-100">
+            <div class="card hover shadow-sm h-100">
                 <div class="card-body d-flex justify-content-between align-items-center">
                     <div>
                         <h5 class="card-title">Projects</h5>
                         <h2 class="fw-bold">{{ $projectsCount ?? 0 }}</h2>
                     </div>
-                    <i class="fas fa-users fa-3x"></i>
+                    <i class="fa-solid fa-diagram-project fa-3x"></i>
                 </div>
                 <div class="card-footer text-center">
-                    <a class="text-dark" href="#">VIEW DETAILS <i class="fa-regular fa-circle-right"></i></a>
+                    <a class="text-dark" href="{{ route('projects.index') }}">View Details <i
+                            class="fa-regular fa-circle-right"></i></a>
                 </div>
             </div>
         </div>
         <!-- Projects -->
         <div class="col-xl-3 col-md-6">
-            <div class="card border-dark hover shadow h-100">
+            <div class="card hover shadow-sm h-100">
                 <div class="card-body d-flex justify-content-between align-items-center">
                     <div>
                         <h5 class="card-title">Tasks</h5>
@@ -57,14 +56,15 @@
                     <i class="fas fa-folder-open fa-3x"></i>
                 </div>
                 <div class="card-footer text-center">
-                    <a class="text-dark" href="#">VIEW DETAILS <i class="fa-regular fa-circle-right"></i></a>
+                    <a class="text-dark" href="{{ route('tasks.index') }}">View Details <i
+                            class="fa-regular fa-circle-right"></i></a>
                 </div>
             </div>
         </div>
 
         <!-- Pending Tasks -->
         <div class="col-xl-3 col-md-6">
-            <div class="card border-dark hover shadow h-100">
+            <div class="card hover shadow-sm h-100">
                 <div class="card-body d-flex justify-content-between align-items-center">
                     <div>
                         <h5 class="card-title">Productivities</h5>
@@ -88,8 +88,9 @@
             </div>
             <div class="card-body">
                 @foreach ($allProjects as $project)
-                <button type="button" class="btn btn-primary prjID"
-                    value="{{ $project->id }}">{{ $project->name }}</button>
+                <button type="button" class="btn btn-outline-dark prjID" value="{{ $project->id }}">
+                    {{ $project->name }}
+                </button>
                 @endforeach
             </div>
         </div>
@@ -150,25 +151,24 @@
                     <h6>Tasks</h6>
                     <div class="row kanban-board" id="board">
                         <div class="col-md-3">
-                            <h6 class="text-center bg-light p-2">Pending</h6>
+                            <h6 class="text-center hover border border-secondary p-2">Pending</h6>
                             <div class="kanban-column" id="pending">
-
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <h6 class="text-center bg-light p-2">On Progress</h6>
+                            <h6 class="text-center hover border border-primary p-2">On Progress</h6>
                             <div class="kanban-column" id="onprogress">
                             </div>
                         </div>
 
                         <div class="col-md-3">
-                            <h6 class="text-center bg-light p-2">Completed</h6>
+                            <h6 class="text-center hover border border-success p-2">Completed</h6>
                             <div class="kanban-column" id="completed">
                             </div>
                         </div>
 
                         <div class="col-md-3">
-                            <h6 class="text-center bg-light p-2">Cancelled</h6>
+                            <h6 class="text-center hover border border-danger p-2">Cancelled</h6>
                             <div class="kanban-column" id="cancelled">
                             </div>
                         </div>
