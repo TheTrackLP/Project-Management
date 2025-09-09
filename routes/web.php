@@ -14,7 +14,8 @@ Route::get('/', function () {
 });
 
 Route::controller(AdminController::class)->group(function () {
-    Route::get('admin/dashboard', 'AdminDashboard')->name('admin.dash');
+    Route::get('/admin/dashboard', 'AdminDashboard')->name('admins.index');
+    Route::get('/admin/projects/{id}/tasks', 'getProjectsTasks');
 });
 
 Route::controller(CategoryController::class)->group(function () {

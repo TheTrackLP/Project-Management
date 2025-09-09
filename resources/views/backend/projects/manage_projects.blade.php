@@ -4,11 +4,12 @@
     <h2 class="my-4"><i class="fa-solid fa-diagram-project"></i> Manage Project</h2>
     <hr>
     @if(!empty($prj_data->id))
-    <form action="{{ route('projects.store') }}" method="post">
+    <form action="{{ route('projects.update') }}" method="post">
+        @csrf
         @else
-        <form action="{{ route('projects.update') }}" method="post">
-            @endif
+        <form action="{{ route('projects.store') }}" method="post">
             @csrf
+            @endif
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">

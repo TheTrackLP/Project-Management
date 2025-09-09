@@ -1,53 +1,57 @@
 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
     <div class="sb-sidenav-menu">
         <div class="nav">
-            <hr>
-            <a class="nav-link" href="">
+
+            <div class="sb-sidenav-menu-heading">Main</div>
+            <a class="nav-link {{ request()->routeIs('admins.*') ? 'active' : '' }}" href="{{ route('admins.index') }}">
                 <div class="sb-nav-link-icon"><i class="fa-solid fa-house"></i></div>
                 Dashboard
             </a>
-            <hr>
             <a class="nav-link {{ request()->routeIs('projects.*') ? 'active' : '' }}"
                 href="{{ route('projects.index') }}">
                 <div class="sb-nav-link-icon"><i class="fa-solid fa-diagram-project"></i></div>
                 Projects
             </a>
-            <hr>
             <a class="nav-link {{ request()->routeIs('tasks.*') ? 'active' : '' }}" href="{{ route('tasks.index') }}">
                 <div class="sb-nav-link-icon"><i class="fa-solid fa-gauge"></i></div>
                 Tasks
             </a>
-            <hr>
             <a class="nav-link {{ request()->routeIs('users.*') ? 'active' : '' }}" href="{{ route('users.index') }}">
                 <div class="sb-nav-link-icon"><i class="fa-solid fa-users"></i></div>
                 Teams/Users
             </a>
-            <hr>
+
+            <div class="sb-sidenav-menu-heading">Tools</div>
             <a class="nav-link" href="#">
                 <div class="sb-nav-link-icon"><i class="fa-solid fa-calendar"></i></div>
                 Calendar
             </a>
-            <hr>
-            <a class="nav-link" href="#">
+            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseReports"
+                aria-expanded="false" aria-controls="collapseReports">
                 <div class="sb-nav-link-icon"><i class="fa-solid fa-bars"></i></div>
                 Reports
+                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
             </a>
-            <hr>
+            <div class="collapse" id="collapseReports" data-bs-parent="#sidenavAccordion">
+                <nav class="sb-sidenav-menu-nested nav">
+                    <a class="nav-link" href="#">Monthly</a>
+                    <a class="nav-link" href="#">Yearly</a>
+                </nav>
+            </div>
+
+            <div class="sb-sidenav-menu-heading">Management</div>
             <a class="nav-link {{ request()->routeIs('cat.*') ? 'active' : '' }}" href="{{ route('cat.index') }}">
                 <div class="sb-nav-link-icon"><i class="fa-solid fa-list"></i></div>
                 Category
             </a>
-            <hr>
             <a class="nav-link {{ request()->routeIs('desig.*') ? 'active' : '' }}" href="{{ route('desig.index') }}">
                 <div class="sb-nav-link-icon"><i class="fa-solid fa-briefcase"></i></div>
                 Designation
             </a>
-            <hr>
             <a class="nav-link" href="#">
                 <div class="sb-nav-link-icon"><i class="fa-solid fa-gear"></i></div>
                 Settings
             </a>
-            <hr>
         </div>
     </div>
     <div class="sb-sidenav-footer">

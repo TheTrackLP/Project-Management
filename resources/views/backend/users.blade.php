@@ -63,9 +63,9 @@ $i = 1;
                             <p>{{ $row->desg_name }}</p>
                         </td>
                         <td class="text-center align-middle">
-                            @if($row->status == 'active')
+                            @if($row->status == 1)
                             <span class="badge rounded-pill text-bg-success">Active</span>
-                            @elseif($row->status == 'inactive')
+                            @elseif($row->status == 0)
                             <span class="badge rounded-pill text-bg-danger">Inactive</span>
                             @endif
                         </td>

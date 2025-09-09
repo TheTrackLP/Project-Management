@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
                 'status' => '1',
             ],
         ]);
-        for ($i=0; $i < 10; $i++) { 
+        for ($i=0; $i < 5; $i++) { 
             User::create([
                 'name' => fake()->name(),
                 'email' => fake()->unique()->safeEmail(),
@@ -38,6 +38,7 @@ class DatabaseSeeder extends Seeder
                 'phone_number' => fake()->phoneNumber(),
                 'address' => fake()->address(),
                 'roles' => '4',
+                'category_id' => "1",
                 'designation_id' => "1",
                 'status' => "1",
             ]);
@@ -49,25 +50,55 @@ class DatabaseSeeder extends Seeder
                 'password' => Hash::make(111),
                 'phone_number' => fake()->phoneNumber(),
                 'address' => fake()->address(),
-                'roles' => '3',
+                'roles' => '4',
+                'category_id' => "2",
                 'designation_id' => "2",
                 'status' => "1",
             ]);
         }
-        Categories::create([
-            'cat_name' => "Web Development",
-            'cat_notes' => 'Web Devs' 
+        for ($i=0; $i < 5; $i++) { 
+            User::create([
+                'name' => fake()->name(),
+                'email' => fake()->unique()->safeEmail(),
+                'password' => Hash::make(111),
+                'phone_number' => fake()->phoneNumber(),
+                'address' => fake()->address(),
+                'roles' => '4',
+                'category_id' => "3",
+                'designation_id' => "3",
+                'status' => "1",
+            ]);
+        }
+        Categories::insert([
+            [
+                'cat_name' => "Web Development",
+                'cat_notes' => 'Web Devs' 
+            ],
+            [
+                'cat_name' => "Mobile Development",
+                'cat_notes' => 'Mobile Devs' 
+            ],
+            [
+                'cat_name' => "Game Development",
+                'cat_notes' => 'Game Devs' 
+            ],
+
         ]);
         Designation::insert([
             [
-                'desg_name' => "Junior Web Developer",
+                'desg_name' => "Web Developer",
                 'category_id' => "1",
                 'desg_notes' => 'For Web Development',
             ],
             [
-                'desg_name' => "Senior Web Developer",
-                'category_id' => "1",
-                'desg_notes' => 'For Web Development',
+                'desg_name' => "Mobile Developer",
+                'category_id' => "2",
+                'desg_notes' => 'For Mobile Development',
+            ],
+            [
+                'desg_name' => "Game Developer",
+                'category_id' => "3",
+                'desg_notes' => 'For Game Development',
             ],
         ]);
     }

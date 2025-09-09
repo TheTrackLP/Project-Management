@@ -68,7 +68,7 @@ label {
 }
 </style>
 
-<body class="sb-nav-fixed">
+<body class="sb-nav-fixed" style="background-color: #eaeaea">
     @include('admin.body.navbar')
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
