@@ -20,8 +20,12 @@ class AdminController extends Controller
 
     public function getProjectsTasks($id){
         $tasks = DB::table("tasks")
+                ->select("tasks.*",
+                                  "users.name as task_assigned")
+                ->join("users", "users.id", "=", "tasks.assigned_user")
                 ->where('tasks.project_id', $id)
                 ->get();
+        
         return response()->json([
             "task"=>$tasks,
         ]);

@@ -96,7 +96,7 @@
         </div>
     </div>
     <div class="row mb-4">
-        <div class="col-sm-2 d-flex order-1 order-xxl-3">
+        <div class="col-sm-3 d-flex order-1 order-xxl-3">
             <div class="card flex-fill w-100">
                 <div class="card-header">
                     <h5 class="card-title mb-0">Tasks Status</h5>
@@ -118,34 +118,11 @@
                                     class="chartjs-render-monitor"></canvas>
                             </div>
                         </div>
-
-                        <table class="table mb-0">
-                            <tbody>
-                                <tr>
-                                    <td><i class="fas fa-circle text-secondary fa-fw"></i> Pending <span
-                                            class="badge badge-success-light">+12%</span></td>
-                                    <td class="text-end">4306</td>
-                                </tr>
-                                <tr>
-                                    <td><i class="fas fa-circle text-primary fa-fw"></i> Ongoing <span
-                                            class="badge badge-danger-light">-3%</span></td>
-                                    <td class="text-end">3801</td>
-                                </tr>
-                                <tr>
-                                    <td><i class="fas fa-circle text-success fa-fw"></i> Completed</td>
-                                    <td class="text-end">1689</td>
-                                </tr>
-                                <tr>
-                                    <td><i class="fas fa-circle text-danger fa-fw"></i> Cancelled</td>
-                                    <td class="text-end">3251</td>
-                                </tr>
-                            </tbody>
-                        </table>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-sm-10">
+        <div class="col-sm-9">
             <div class="card shadow-sm border-0">
                 <div class="card-body">
                     <h6>Tasks</h6>
@@ -183,9 +160,12 @@
 <!-- Chart.js Script -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
+let taskChart;
+
 $(document).ready(function() {
     $(".prjID").click(function() {
         var prj_id = $(this).val();
+
         $.ajax({
             type: "GET",
             url: "/admin/projects/" + prj_id + "/tasks",
@@ -195,90 +175,94 @@ $(document).ready(function() {
                 $('#completed').empty();
                 $('#cancelled').empty();
 
+                let pendingCount = 0;
+                let progressCount = 0;
+                let completedCount = 0;
+                let cancelledCount = 0;
 
                 $.each(res.task, function(key, task) {
                     var status = task.status;
+                    var strdate = new Date(task.end_date);
+                    var endDate = moment(strdate).format('MMM/DD/YYYY');
+
                     switch (status) {
                         case 0:
+                            pendingCount++;
                             $("#pending").append(`
-                            <div class="card mb-2">
-                                <div class="card-body p-2">
-                                    <p>
-                                    <strong>${task.task_name}</strong> 
-                                    <span class="float-end badge bg-danger">High</span>
-                                    </p>
-                                    <p><small>Due: ${task.due_date ?? 'N/A'}</small></p>
-                                    <p><small>Assigned: ${task.assigned_to ?? 'Unassigned'}</small></p>
+                                <div class="card mb-2">
+                                    <div class="card-body hover p-2">
+                                        <p><strong>${task.task_name}</strong></p>
+                                        <p><small>Due: ${endDate ?? 'N/A'}</small></p>
+                                        <p><small>Assigned: ${task.task_assigned ?? 'Unassigned'}</small></p>
+                                    </div>
                                 </div>
-                            </div>
                             `);
-
                             break;
+
                         case 1:
+                            progressCount++;
                             $("#onprogress").append(`
-                            <div class="card mb-2">
-                                <div class="card-body p-2">
-                                    <p>
-                                    <strong>${task.task_name}</strong> 
-                                    <span class="float-end badge bg-danger">High</span>
-                                    </p>
-                                    <p><small>Due: ${task.due_date ?? 'N/A'}</small></p>
-                                    <p><small>Assigned: ${task.assigned_to ?? 'Unassigned'}</small></p>
+                                <div class="card mb-2">
+                                    <div class="card-body p-2">
+                                        <p><strong>${task.task_name}</strong></p>
+                                        <p><small>Due: ${endDate ?? 'N/A'}</small></p>
+                                        <p><small>Assigned: ${task.task_assigned ?? 'Unassigned'}</small></p>
+                                    </div>
                                 </div>
-                            </div>
                             `);
                             break;
 
                         case 2:
+                            completedCount++;
                             $("#completed").append(`
-                            <div class="card mb-2">
-                                <div class="card-body p-2">
-                                    <p>
-                                    <strong>${task.task_name}</strong> 
-                                    <span class="float-end badge bg-danger">High</span>
-                                    </p>
-                                    <p><small>Due: ${task.due_date ?? 'N/A'}</small></p>
-                                    <p><small>Assigned: ${task.assigned_to ?? 'Unassigned'}</small></p>
+                                <div class="card mb-2">
+                                    <div class="card-body p-2">
+                                        <p><strong>${task.task_name}</strong></p>
+                                        <p><small>Due: ${endDate ?? 'N/A'}</small></p>
+                                        <p><small>Assigned: ${task.task_assigned ?? 'Unassigned'}</small></p>
+                                    </div>
                                 </div>
-                            </div>
                             `);
                             break;
 
                         case 3:
+                            cancelledCount++;
                             $("#cancelled").append(`
-                            <div class="card mb-2">
-                                <div class="card-body p-2">
-                                    <p>
-                                    <strong>${task.task_name}</strong> 
-                                    <span class="float-end badge bg-danger">High</span>
-                                    </p>
-                                    <p><small>Due: ${task.due_date ?? 'N/A'}</small></p>
-                                    <p><small>Assigned: ${task.assigned_to ?? 'Unassigned'}</small></p>
+                                <div class="card mb-2">
+                                    <div class="card-body p-2">
+                                        <p><strong>${task.task_name}</strong></p>
+                                        <p><small>Due: ${endDate ?? 'N/A'}</small></p>
+                                        <p><small>Assigned: ${task.task_assigned ?? 'Unassigned'}</small></p>
+                                    </div>
                                 </div>
-                            </div>
                             `);
                             break;
-                        default:
-                            break;
                     }
+                });
 
+                const ctx2 = document.getElementById('taskStatusChart').getContext('2d');
+
+                if (taskChart) {
+                    taskChart.destroy();
+                }
+
+                taskChart = new Chart(ctx2, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Pending', 'Ongoing', 'Completed', 'Cancelled'],
+                        datasets: [{
+                            data: [pendingCount, progressCount,
+                                completedCount, cancelledCount
+                            ],
+                            backgroundColor: ['#6c757d', '#0d6efd',
+                                '#28a745', '#dc3545'
+                            ]
+                        }]
+                    }
                 });
             }
-
         });
     });
-
-});
-const ctx2 = document.getElementById('taskStatusChart').getContext('2d');
-new Chart(ctx2, {
-    type: 'doughnut',
-    data: {
-        labels: ['Pending', 'Ongoing', 'Completed', 'Cancelled'],
-        datasets: [{
-            data: [12, 20, 45, 18],
-            backgroundColor: ['#6c757d', '#0d6efd', '#28a745', '#dc3545']
-        }]
-    }
 });
 </script>
 @endsection
