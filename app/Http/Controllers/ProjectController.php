@@ -9,6 +9,7 @@ use App\Models\Projects;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use DB;
 
 class ProjectController extends Controller
 {
@@ -95,6 +96,7 @@ class ProjectController extends Controller
                             "project_members.*",
                             "users.name as member_name",
                             "users.email as member_email",
+                            "users.avatar as member_avatar",
                             "users.category_id as member_category",
                             "users.designation_id as member_desgination",
                             "categories.cat_name",
@@ -107,7 +109,15 @@ class ProjectController extends Controller
                         ->join("designations", "designations.id", "=", "users.designation_id")
                         ->where("projects.id", $id)
                         ->get();
-        return view('backend.projects.view_project', compact('prj_info', 'members'));
+
+        $project_tasks = DB::table("tasks")
+                ->select("tasks.*",
+                                  "users.name as task_assigned")
+                ->join("users", "users.id", "=", "tasks.assigned_user")
+                ->where('tasks.project_id', $id)
+                ->get();
+
+        return view('backend.projects.view_project', compact('prj_info', 'members', 'project_tasks'));
     }
 
     public function ProjectManage($id){

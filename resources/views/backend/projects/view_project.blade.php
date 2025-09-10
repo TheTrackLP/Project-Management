@@ -1,5 +1,9 @@
 @extends('admin.body.header')
 @section('admin')
+
+@php
+$i = 1;
+@endphp
 <style>
 label,
 p {
@@ -95,7 +99,7 @@ p {
                 <div class="card profile-card mx-auto shadow-sm mb-3 border-dark rounded-3" style="max-width: 450px;">
                     <div class="row g-0 align-items-center">
                         <div class="col-4">
-                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
+                            <img src="{{ asset($row->member_avatar ?? 'img/profile-blank.png')   }}"
                                 class="img-fluid rounded-start" alt="Profile Image">
                         </div>
                         <div class="col-8">
@@ -109,6 +113,38 @@ p {
                     </div>
                 </div>
                 @endforeach
+            </div>
+            <hr>
+            <div class="card-header">
+                <h3 class="card-title">Project Tasks</h3>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered" id="dataTables">
+                    <thead class="table-dark">
+                        <tr>
+                            <th class="text-center">#</th>
+                            <th class="text-center">Task Name</th>
+                            <th class="text-center">Assigned User</th>
+                            <th class="text-center">Duration</th>
+                            <th class="text-center">Status</th>
+                            <th class="text-center">Date</th>
+                            <th class="text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($project_tasks as $task)
+                        <tr>
+                            <td class="align-middle text-center">{{ $i++ }}</td>
+                            <td class="align-middle text-center"></td>
+                            <td class="align-middle text-center"></td>
+                            <td class="align-middle text-center"></td>
+                            <td class="align-middle text-center"></td>
+                            <td class="align-middle text-center"></td>
+                            <td class="align-middle text-center"></td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
