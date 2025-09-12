@@ -101,7 +101,7 @@ class ProjectController extends Controller
                             "users.designation_id as member_desgination",
                             "categories.cat_name",
                             "designations.desg_name",
-                            "projects.id",
+                            "users.id",
                         )
                         ->join("users", "users.id", "=", "project_members.user_id")
                         ->join("projects", "projects.id", "=", "project_members.projects_id")

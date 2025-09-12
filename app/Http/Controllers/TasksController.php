@@ -67,7 +67,15 @@ class TasksController extends Controller
     }
 
     public function TaskInfo($id){
-        $task = Tasks::findorfail($id);
+        $task = Tasks::select(
+            "tasks.*",
+            "projects.name as project_name",
+            )
+            ->join("projects", "projects.id", "=", "tasks.project_id")
+            ->join("users", "users.id", "=", "tasks.assigned_user")
+            ->join("project_members", "project_members.user_id", "=", "tasks.assigned_user")
+            ->where('tasks.id', $id)
+            ->first();
         return response()->json([
             "task"=>$task,
         ]);
