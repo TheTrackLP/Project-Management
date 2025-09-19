@@ -34,11 +34,16 @@
             </a>
             <div class="collapse" id="collapseReports" data-bs-parent="#sidenavAccordion">
                 <nav class="sb-sidenav-menu-nested nav">
-                    <a class="nav-link" href="#">Monthly</a>
-                    <a class="nav-link" href="#">Yearly</a>
+                    <a class="nav-link {{ request()->routeIs('reports.projects') ? 'active' : '' }}"
+                        href="{{ route('reports.projects') }}">Projects Reports</a>
+
+                    <a class="nav-link {{ request()->routeIs('reports.tasks') ? 'active' : '' }}"
+                        href="{{ route('reports.tasks') }}">Task Reports</a>
+
+                    <a class="nav-link {{ request()->routeIs('reports.productivity') ? 'active' : '' }}"
+                        href="{{ route('reports.productivity') }}">Productivity Reports</a>
                 </nav>
             </div>
-
             <div class="sb-sidenav-menu-heading">Management</div>
             <a class="nav-link {{ request()->routeIs('cat.*') ? 'active' : '' }}" href="{{ route('cat.index') }}">
                 <div class="sb-nav-link-icon"><i class="fa-solid fa-list"></i></div>

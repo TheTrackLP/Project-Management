@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DesignationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\TasksController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
@@ -56,6 +57,12 @@ Route::controller(TasksController::class)->group(function(){
     Route::post('/admin/tasks/store', 'TaskStore')->name('tasks.store');
     Route::get('/admin/tasks/edit/{id}', 'TaskInfo');
     Route::post('/admin/tasks/update', 'taskUpdate')->name('task.update');
+});
+
+Route::controller(ReportsController::class)->group(function(){
+    Route::get('/admin/reports/projects', 'ProjectReports')->name('reports.projects');
+    Route::get('/admin/reports/tasks', 'TaskReports')->name('reports.tasks');
+    Route::get('/admin/reports/Productivity', 'ProductivityReports')->name('reports.productivity');
 });
 
 // Route::get('/dashboard', function () {
