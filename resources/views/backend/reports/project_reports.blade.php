@@ -31,6 +31,11 @@ $i = 1;
                             {{ $row->project_manager_id }}
                         </td>
                         <td class="align-middle text-center">
+                            @if(isset($project_members[$row->id]))
+                            {{ $project_members[$row->id]->members ?? 0 }}
+                            @else
+                            <p></p>
+                            @endif
                         </td>
                         <td class="align-middle text-center">
                             @if (isset($task_count[$row->id]))
@@ -55,7 +60,29 @@ $i = 1;
                             <p>{{ date('M d, Y', strtotime($row->start_date)) }}</p>
                             <p>{{ date('M d, Y', strtotime($row->end_date)) }}</p>
                         </td>
-                        <td class="align-middle text-center"></td>
+                        <td class="align-middle text-center">
+                            @if (isset($on_progress[$row->id]) || isset($completed[$row->id]))
+                            @php
+                            $completedCount = $completed[$row->id]->complete ?? 0;
+                            $ongoingCount = $on_progress[$row->id]->ongoing ?? 0;
+                            $totalCount = $completedCount + $ongoingCount;
+
+                            $completedPercent = $totalCount > 0 ? ($completedCount / $totalCount) * 100 : 0;
+                            $ongoingPercent = $totalCount > 0 ? ($ongoingCount / $totalCount) * 100 : 0;
+                            @endphp
+
+                            <div class="progress">
+                                <div class="progress-bar bg-success" style="width: {{ $completedPercent }}%">
+                                    Completed ({{ $completedCount }})
+                                </div>
+                                <div class="progress-bar bg-secondary" style="width: {{ $ongoingPercent }}%">
+                                    In Progress ({{ $ongoingCount }})
+                                </div>
+                            </div>
+                            @else
+                            <p>No Task As of yet</p>
+                            @endif
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>
