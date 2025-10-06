@@ -98,6 +98,7 @@ label {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
     </script>
     <script src="{{ asset('assets/js/scripts.js')}}"></script>
+    <script src="{{ asset('assets/js/filter.js')}}"></script>
 </body>
 <script>
 @if(Session::has('message'))
@@ -122,7 +123,6 @@ switch (type) {
 @endif
 
 $(document).ready(function() {
-    $(".dataTables").dataTable();
     $('.summernote').summernote({
         height: 300,
     });

@@ -18,8 +18,10 @@ class UsersController extends Controller
         $users = User::select(
                         "users.*",
                         "designations.desg_name",
+                        "categories.cat_name",
                         )
                         ->join("designations", "designations.id", "=", 'users.designation_id')
+                        ->join("categories", "categories.id", "=", 'users.category_id')
                         ->get();
         return view('backend.users', compact('cat', 'desg', 'users'));
     }

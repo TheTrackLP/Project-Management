@@ -22,7 +22,9 @@ class ProjectController extends Controller
         ->join("categories", "categories.id", "=", "projects.category_id")
         ->join("users", "users.id", "=", "projects.project_manager_id")
         ->get();
-        return view('backend.projects.projects', compact('prjs'));
+
+        $cate = Categories::all();
+        return view('backend.projects.projects', compact('prjs', 'cate'));
     }
 
     public function createProjects(){

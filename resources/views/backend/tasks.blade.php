@@ -11,12 +11,48 @@ $i = 1;
             <a href="#" class="btn btn-primary px-4 float-end" data-bs-toggle="modal" data-bs-target="#manageTask"
                 id="clearForm"><i class="fa-solid fa-circle-plus"></i> Create
                 New</a>
-            <h3 class="card-title">
-                Information Tasks
-            </h3>
+        </div>
+        <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <i class="fa-solid fa-filter"></i>
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="">Category</label>
+                                    <select name="selectProject" class="select2 selectProject">
+                                        <option value=""></option>
+                                        @foreach ($prjs as $prj)
+                                        <option value="{{ $prj->name }}">{{ $prj->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="">Status</label>
+                                    <select name="selectStatus" class="select2 selectStatus">
+                                        <option value="" selected disabled>Select an option</option>
+                                        <option value="Pending">Pending</option>
+                                        <option value="Ongoing">Ongoing</option>
+                                        <option value="Completed">Completed</option>
+                                        <option value="Cancelled">Cancelled</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="card-body">
-            <table class="table table-bordered dataTables">
+            <table class="table table-bordered" id="taskTable">
                 <thead class="table-dark">
                     <tr>
                         <th class="text-center">#</th>

@@ -22,10 +22,46 @@ $i = 1;
             <button type="button" class="btn btn-primary px-4 float-end" data-bs-toggle="modal"
                 data-bs-target="#manageInfoModal" id="clearForm"><i class="fa-solid fa-circle-plus"></i>Create
                 New</button>
-            <h3 class="card-title">Information Users/Members</h3>
+        </div>
+        <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <i class="fa-solid fa-filter"></i>
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="">Category</label>
+                                    <select name="selectUcategory" class="select2 selectUcategory">
+                                        <option value=""></option>
+                                        @foreach ($cat as $cate)
+                                        <option value="{{ $cate->cat_name }}">{{ $cate->cat_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="">Status</label>
+                                    <select name="selectUserStatus" class="select2 selectUserStatus">
+                                        <option value="" selected disabled>Select an option</option>
+                                        <option value="Active">Active</option>
+                                        <option value="Inactive">Inactive</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="card-body">
-            <table class="table table table-bordered table-hovered dataTables">
+            <table class="table table table-bordered table-hovered" id="usersTable">
                 <thead class="table-dark">
                     <tr>
                         <th class="text-center">#</th>
@@ -60,7 +96,7 @@ $i = 1;
                             <p>{{ $row->phone_number }}</p>
                         </td>
                         <td class="text-center align-middle">
-                            <p>{{ $row->desg_name }}</p>
+                            <p>{{ $row->cat_name }}/{{ $row->desg_name }}</p>
                         </td>
                         <td class="text-center align-middle">
                             @if($row->status == 1)
