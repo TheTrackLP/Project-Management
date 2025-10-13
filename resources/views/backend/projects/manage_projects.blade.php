@@ -7,7 +7,7 @@
     <form action="{{ route('projects.update') }}" method="post">
         @csrf
         @else
-        <form action="{{ route('projects.store') }}" method="post">
+        <form id="myForm" action="{{ route('projects.store') }}" method="post">
             @csrf
             @endif
             <div class="card">
@@ -48,7 +48,7 @@
                         </div>
                     </div>
                     <div class="row mb-4">
-                        <div class="col-6">
+                        <div class="form-group col-6">
                             <label for="">Project Manager</label>
                             <select name="project_manager_id" class="select2">
                                 <option value=""></option>
@@ -60,7 +60,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-6">
+                        <div class="form-group col-6">
                             <label for="">Category</label>
                             <select name="category_id" id="category_id" class="select2">
                                 <option value=""></option>
@@ -73,7 +73,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-8">
+                        <div class="form-group col-8">
                             <label for="">Team Members</label>
                             <select name="team_members[]" id="" class="select2" multiple="multiple">
                                 <option value=""></option>
@@ -85,7 +85,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-2">
+                        <div class="form-group col-2">
                             <label for="">Status</label>
                             <select name="status" id="status" class="select2">
                                 <option value="" disabled selected>Select an option</option>
@@ -99,7 +99,7 @@
                                 </option>
                             </select>
                         </div>
-                        <div class="col-2">
+                        <div class="form-group col-2">
                             <label for="">Priority</label>
                             <select name="priority" id="priority" class="select2">
                                 <option value="" disabled selected>Select an option</option>
@@ -114,7 +114,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="row mb-4">
+                    <div class="row form-group mb-4">
                         <label for="">Description</label>
                         <textarea name="description" class="summernote"
                             id="description">{{ $prj_data->description ?? '' }}</textarea>
@@ -129,5 +129,82 @@
         </form>
     </form>
 </div>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#myForm').validate({
+        ignore: [],
+        rules: {
+            name: {
+                required: true,
+            },
+            start_date: {
+                required: true,
+            },
+            end_date: {
+                required: true,
+            },
+            project_manager_id: {
+                required: true,
+            },
+            category_id: {
+                required: true,
+            },
+            'team_members[]': {
+                required: true,
+            },
+            status: {
+                required: true,
+            },
+            priority: {
+                required: true,
+            },
+            description: {
+                required: true,
+            },
 
+        },
+        messages: {
+            name: {
+                required: 'Please Enter Project Name',
+            },
+            start_date: {
+                required: 'Please Enter Start Date',
+            },
+            end_date: {
+                required: 'Please Enter End Date',
+            },
+            project_manager_id: {
+                required: 'Please Select a Manager',
+            },
+            category_id: {
+                required: 'Please Select a Category',
+            },
+            'team_members[]': {
+                required: 'Please Select Project Members',
+            },
+            status: {
+                required: 'Please Select a Status',
+            },
+            priority: {
+                required: 'Please Select a Priority',
+            },
+            description: {
+                required: 'Please Enter Project Description',
+            },
+
+        },
+        errorElement: 'span',
+        errorPlacement: function(error, element) {
+            error.addClass('invalid-feedback');
+            element.closest('.form-group').append(error);
+        },
+        highlight: function(element, errorClass, validClass) {
+            $(element).addClass('is-invalid');
+        },
+        unhighlight: function(element, errorClass, validClass) {
+            $(element).removeClass('is-invalid');
+        },
+    });
+});
+</script>
 @endsection

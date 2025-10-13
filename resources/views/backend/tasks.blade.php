@@ -212,7 +212,60 @@ $i = 1;
         </form>
     </div>
 </div>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#taskForm').validate({
+        ignore: [],
+        rules: {
+            task_name: {
+                required: true,
+            },
+            assigned_user: {
+                required: true,
+            },
+            project_id: {
+                required: true,
+            },
+            start_date: {
+                required: true,
+            },
+            end_date: {
+                required: true,
+            },
 
+        },
+        messages: {
+            task_name: {
+                required: 'Please Enter Task Name',
+            },
+            assigned_user: {
+                required: 'Please Select a Assigned Member for the Task',
+            },
+            project_id: {
+                required: 'Please Select a Project',
+            },
+            start_date: {
+                required: 'Please Enter a Start Date',
+            },
+            end_date: {
+                required: 'Please Enter a End Date',
+            },
+
+        },
+        errorElement: 'span',
+        errorPlacement: function(error, element) {
+            error.addClass('invalid-feedback');
+            element.closest('.form-group').append(error);
+        },
+        highlight: function(element, errorClass, validClass) {
+            $(element).addClass('is-invalid');
+        },
+        unhighlight: function(element, errorClass, validClass) {
+            $(element).removeClass('is-invalid');
+        },
+    });
+});
+</script>
 <script>
 $(document).ready(function() {
     $("#project_id").change(function() {

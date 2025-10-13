@@ -39,6 +39,9 @@
 
     <!-- Moment -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.js"></script>
+
+    <!-- Validate -->
+    <script src="{{ asset('assets/js/validate.min.js') }}"></script>
 </head>
 
 <style>
